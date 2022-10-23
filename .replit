@@ -1,0 +1,3 @@
+language = "csharp"
+
+run = "mcs -out:main.exe 'ListaFila.cs' ; mono main.exe"
