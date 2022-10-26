@@ -24,7 +24,7 @@ class Program{
       Console.Write(" "+i);
 
     f.Enqueue(5);
-    f.Dequeue();
+    //f.Dequeue();
     a1 = f.p1.ToArray();
     Console.WriteLine("\nP1: ");
     foreach(Object i in a1)
