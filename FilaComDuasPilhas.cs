@@ -56,13 +56,10 @@ class Fila{
     return p2.Peek();
   }
   public object Size(){
-    if(p1.Count!=0)
-      Inverter1();
-    return p2.Count;
+    return p2.Count+p1.Count;
   }
   public Boolean isEmpty(){
-    return (p1.Count==0 && p2.Count!=0) ||
-           (p1.Count!=0 && p2.Count==0);
+    return p1.Count!=p2.Count;
   }
   private void Inverter1(){
     int x = p1.Count;
