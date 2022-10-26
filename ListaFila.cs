@@ -5,9 +5,9 @@ class Program{
     Fila f = new Fila();
     for(int i=1; i<=4; i++) 
       f.Enqueue(i);
-    Console.WriteLine("Dequeue: " + f.Dequeue());
-    Console.WriteLine("Dequeue: " + f.Dequeue());
-    Console.WriteLine("Size: " + f.Size());
+    //Console.WriteLine("Dequeue: " + f.Dequeue());
+    //Console.WriteLine("Dequeue: " + f.Dequeue());
+    //Console.WriteLine("Size: " + f.Size());
     Console.WriteLine("isEmpty: " + f.IsEmpty());
     f.print();
   }
