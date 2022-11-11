@@ -24,7 +24,7 @@ class Program{
       Console.Write(" "+i);
 
     f.Enqueue(5);
-    //f.Dequeue();
+    f.Dequeue();
     a1 = f.p1.ToArray();
     Console.WriteLine("\nP1: ");
     foreach(Object i in a1)
@@ -55,20 +55,17 @@ class Fila{
       return p1.Peek();
     return p2.Peek();
   }
-  public object Size(){
+  public int Size(){
     return p2.Count+p1.Count;
   }
   public Boolean isEmpty(){
     return p1.Count!=p2.Count;
   }
   private void Inverter1(){
-    int x = p1.Count;
-    for(int i=0; i<x; i++)
+    for(int i=0; i<Size(); i++)
        p2.Push(p1.Pop());
-  }
-  private void Inverter2(){
-    int x = p2.Count;
-    for(int i=0; i<x; i++)
+
+    for(int i=0; i<Size(); i++)
       p1.Push(p2.Pop());
   }
 }
