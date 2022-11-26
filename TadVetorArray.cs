@@ -3,14 +3,14 @@ using System;
 class MainClass{
   public static void Main(){
     Vector v = new Vector(2);
-    v.Insere_Fim(10);
-    v.Insere_Fim(11);
-    v.replaceAtRank(2,4);
-    v.insertAtRank(3,-12);
-    v.replaceAtRank(4,5);
+    v.insertAtRank(0, 1);
+    v.insertAtRank(1, 2);
+    v.insertAtRank(2, 3);
+    v.insertAtRank(3, "P");
+    v.insertAtRank(5, "A");
     v.Ver_Vetor();
-    v.Remove();
-    Console.WriteLine("\nSize: "+v.Size());
+    v.removeAtRank(0);
+    Console.WriteLine();
     v.Ver_Vetor();
     
   }
@@ -18,8 +18,6 @@ class MainClass{
 
 
 interface IVector{
-  //Adiciona no fim do vetor
-  void Insere_Fim(object o);
   //Retorna sem remover o elemento na posição r
   object elementAtRank(int r);
   //Substitui o elemento na posição r por o e retorna o antigo elemento
@@ -32,8 +30,6 @@ interface IVector{
   int Size();
   //Retorna se há elementos ou nãobject
   Boolean isEmpty();
-  //Remove do inicio do vetor
-  object Remove_Fim();
 }
 
 
@@ -49,8 +45,8 @@ class Vector: IVector{
   // Método para verificar o vetor
   public void Ver_Vetor(){
     Console.Write("[");
-    foreach(object i in vetor)
-      Console.Write(i+" ");
+    for(int i=0; i<size; i++)
+      Console.Write(" "+vetor[i]);
     Console.Write("]");
   }
   
@@ -62,15 +58,8 @@ class Vector: IVector{
     capacity = capacity*2; 
   }
   
-  public void Insere_Fim(object o){
-    if(size==capacity)
-      Capacity_Up();
-    vetor[size] = o;
-    size++;
-  }
-  
   public object elementAtRank(int r){
-    if(size==0)
+    if(isEmpty())
       throw new VectorVazia("Vetor Vazio");
     if(r>=size)
       throw new IndiceForadeFaixa("índice fora de faixa");
@@ -78,45 +67,36 @@ class Vector: IVector{
   }
   
   public object replaceAtRank(int r, object o){
-    object temp;
     if(size==0)
       throw new VectorVazia("Vetor Vazio");
-    if(r>size)
+    if(r>=size)
       throw new IndiceForadeFaixa("índice fora de faixa");
-    if(r==size){
-      if(size==capacity)
-        Capacity_Up();
-      temp = vetor[r];
-      vetor[r] = o;
-      size++;
-    }
-    else{
-      temp = vetor[r];
-      vetor[r] = o;
-    }
+    object temp = vetor[r];
+    vetor[r] = o;
     return temp;
   }
   public void insertAtRank(int r, object o){
-    if(size==0)
-      throw new VectorVazia("Vetor Vazio");
     if(r>size)
       throw new IndiceForadeFaixa("índice fora de faixa");
-    if(r==size){
-      if(size==capacity)
+    if(size==capacity)
         Capacity_Up();
+    if(r==size)
       vetor[r] = o;
-      size++;
+    else{
+      for(int i=size; i>r; i--)
+        vetor[i] = vetor[i-1];
+      vetor[r] = o;
     }
-    else
-      vetor[r] = o;
+    size++;
   }
+  
   public object removeAtRank(int r){
     if(size==0)
       throw new VectorVazia("Vetor Vazio");
     if(r>=size)
       throw new IndiceForadeFaixa("índice fora de faixa");
     object temp = vetor[r];
-    for(int i=r; i<size; i++)
+    for(int i=r; i<size-1; i++)
       vetor[i]=vetor[i+1];
     size--;
     return temp;
@@ -125,22 +105,15 @@ class Vector: IVector{
     return size;
   }
   public Boolean isEmpty(){
-    return size!=0;
+    return size==0;
   }
 
-  public Object Remove_Fim(){
-    if(size==0)
-        throw new VectorVazia("Vetor Vazio");
-    object temp = vetor[size];
-    size--;
-    return temp;
-  }
+}
+
+public class VectorVazia : Exception { 
+  public VectorVazia(String err){ }
+}
   
-  public class VectorVazia : Exception { 
-    public VectorVazia(String err){ }
-  }
-  
-  public class IndiceForadeFaixa : Exception { 
-    public IndiceForadeFaixa(String err){ }
-  }
+public class IndiceForadeFaixa : Exception { 
+  public IndiceForadeFaixa(String err){ }
 }
