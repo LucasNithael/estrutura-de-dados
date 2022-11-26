@@ -63,6 +63,8 @@ class Vector{
       throw new IndiceForadeFaixa("Índice fora de faixa");
     Node new_ = new Node(o);
     if(r==0 && isEmpty()){
+      new_.GetPrev(i);
+      new_.GetNext(f);
       i.SetNext(new_);
       f.SetPrev(new_);
     }

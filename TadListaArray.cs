@@ -33,20 +33,17 @@ class List: IList{
   public List(){
     capacity = 3;
     list = new object[capacity];
-  }
-  
+  }  
   public Boolean isFirst(object n){
     if(isEmpty())
       throw new ListVazia("Lista Vazia");
     return list[0].Equals(n);
   }
-
   public Boolean isLast(object n){
     if(isEmpty())
       throw new ListVazia("Lista Vazia");
     return list[size-1].Equals(n);
   }
-
   public object First(){
     if(isEmpty())
       throw new ListVazia("Lista Vazia");
@@ -57,7 +54,6 @@ class List: IList{
       throw new ListVazia("Lista Vazia");
     return list[size-1];
   }
-
   public object Before(object p){
     if(isEmpty())
       throw new ListVazia("Lista Vazia");
@@ -71,7 +67,6 @@ class List: IList{
       throw new ElementoNaoExiste("Elemente não existe");
     return list[index+1];
   }
-
   public object After(object p){
     if(isEmpty())
       throw new ListVazia("Lista Vazia");
@@ -96,13 +91,11 @@ class List: IList{
     }
     size++;
   }
-    
   public void insertLast(object o){
     if(capacity==size)
       Capacity_Up();
     list[size++] = o;
   }
-
   public void replaceElement(object n, object o){
     if(isEmpty())
       throw new ListVazia("Lista Vazia");
@@ -116,7 +109,6 @@ class List: IList{
       throw new ElementoNaoExiste("Elemente não existe");
     list[index] = o;
   }
-
   public void swapElements(object n, object o){
     if(isEmpty())
       throw new ListVazia("Lista Vazia");
@@ -137,7 +129,6 @@ class List: IList{
     list[index1] = list[index2];
     list[index2] = aux;
   }
-  
   public void insertAfter(object n, object o){
     if(capacity==size)
       Capacity_Up();
@@ -155,7 +146,6 @@ class List: IList{
     list[index+1] = o;
     size++;
   }
-
   public void insertBefore(object n, object o){
     if(capacity==size)
       Capacity_Up();
@@ -173,7 +163,6 @@ class List: IList{
     list[index] = o;
     size++;
   }
-
   public object Remove(object n){
     if(isEmpty())
       throw new ListVazia("Lista Vazia");
@@ -191,15 +180,12 @@ class List: IList{
     size--;
     return temp;  
   }
-  
   public Boolean isEmpty(){
     return size==0;
   }
-
   public int Size(){
     return size;
   }
-
   public void Capacity_Up(){
     object[] vetor_aux = new object[capacity*2];
     for(int i=0; i<capacity; i++)
@@ -207,7 +193,6 @@ class List: IList{
     list = vetor_aux;
     capacity = capacity*2; 
   }
-  
   public void ver_list(){
     Console.Write("[");
     for(int i=0; i<size; i++)
@@ -222,10 +207,6 @@ public class ListVazia : Exception {
   public ListVazia(String err){ }
 }
   
-public class IndiceForadeFaixa : Exception { 
-  public IndiceForadeFaixa(String err){ }
-}
-
 public class ElementoNaoExiste : Exception { 
   public ElementoNaoExiste(String err){ }
 }
