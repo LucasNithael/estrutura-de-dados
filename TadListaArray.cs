@@ -7,20 +7,17 @@ class Program{
       l.insertFirst(3);
       l.insertLast(4);
       l.insertLast(5);
-      //Console.WriteLine(l.After(5));
+      //Console.WriteLine("After: "+l.After(4));
       //l.replaceElement(5, 100);
-      //l.swapElements(3, 100);
-      l.insertAfter(3, 8);
-      l.insertBefore(3, 10);
-      l.Remove(8);
-      Console.WriteLine("\nSize:"+l.size);
+      //l.swapElements(3, 5);
+      //l.insertAfter(5, 8);
+      //l.insertBefore(5, 10);
+      //l.Remove(5);
+      //Console.WriteLine("\nSize:"+l.size);
       l.ver_list();
     }
     catch(ListVazia){
       Console.WriteLine("Lista vazia");
-    }
-    catch(ElementoNaoExiste){
-      Console.WriteLine("Elemento não existe");
     }
   }
 }
@@ -63,6 +60,8 @@ class List: IList{
         index = i;
         break;
       }
+    if(index==0)
+      return null;
     return list[index-1];
   }
   public object After(object p){
@@ -74,6 +73,8 @@ class List: IList{
         index = i;
         break;
       }
+    if(index==size-1)
+      return null;
     return list[index+1];
   }
   public void insertFirst(object o){
@@ -163,6 +164,10 @@ class List: IList{
         break;
       }
     object temp = list[index];
+    if(index==size-1){
+      size--;
+      return temp;
+    }
     for(int i=index; i<size; i++)
       list[i] = list[i+1];
     size--;
@@ -219,13 +224,13 @@ interface IList{
   //Troca o object n com object o *
   void swapElements(object n, object o);
   //Insere o depois do n 
-  object insertBefore(object n, object o);
+  void insertBefore(object n, object o);
   //Insere o antes do n
-  object insertAfter(object n, object o);
+  void insertAfter(object n, object o);
   //Insere no inicio *
-  object insertFirst(object o);
+  void insertFirst(object o);
   //Insere no fim *
-  object insertLast(object o);
+  void insertLast(object o);
   //Remove n 
   object Remove(object n);
   //retorna o tamanho
