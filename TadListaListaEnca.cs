@@ -21,34 +21,36 @@ using System;
 class Program{
   public static void Main(){
     try{
+      Node a, b, c, d, e;
       List l = new List();
-      l.insertFirst(1);
-      l.insertFirst(2);
-      l.insertFirst(3);
-      l.insertLast(4);
-      l.insertLast(5);
-      //Console.WriteLine("isFirst: "+l.isFirst(2));
-      //Console.WriteLine("isLast: "+l.isLast(1));
-      //Console.WriteLine("First: "+l.First());
-      //Console.WriteLine("Last: "+l.Last());
-      //Console.WriteLine("Before: "+l.Before(3));
-      //Console.WriteLine("After: "+l.After(1));
-      //Console.WriteLine("replaceElement: "+l.replaceElement(3, 4));
-      //l.swapElements(2, 3);
-      //l.insertBefore(3, "P");
-      //l.insertAfter(1, "Q");
-      //Console.WriteLine("Remove: "+l.Remove(2));
+      a = l.insertFirst(1);
+      b = l.insertFirst(2);
+      c = l.insertFirst(3);
+      //d = l.insertLast(4);
+      //e = l.insertLast(5);
+
+      Console.WriteLine("------------------------------");
+      //Console.WriteLine("isFirst: "+l.isFirst(a));
+      //Console.WriteLine("isLast: "+l.isLast(a));
+      //Console.WriteLine("First: "+l.First().GetElement());
+      //Console.WriteLine("Last: "+l.Last().GetElement());
+      //Console.WriteLine("Before: "+l.Before(a).GetElement());
+      //Console.WriteLine("After: "+l.After(c).GetElement());
+      //Console.WriteLine("replaceElement: "+l.replaceElement(a, 4));
+      //l.swapElements(a, c);
+      //l.insertBefore(c, 5);
+      //l.insertAfter(a, 100);
+      //Console.WriteLine("Remove: "+l.Remove(a));
       Console.WriteLine("Size:"+l.Size());
-     
+      Console.WriteLine("------------------------------");
+      
+      Console.WriteLine("\nInício para o Fim:");
       l.Ver_Lista_i();
-      Console.WriteLine();
+      Console.WriteLine("\nFim para o Início:");
       l.Ver_Lista_f();
     }
     catch(ListVazia){
       Console.WriteLine("Lista Vazia");
-    }
-    catch(ElementoNaoExiste){
-      Console.WriteLine("Elemento não existe");
     }
   }
 }
@@ -62,184 +64,108 @@ class List{
     i.SetNext(f);
     f.SetPrev(i);
   }
-  public Boolean isFirst(object o){
+  public Boolean isFirst(Node o){
     if(isEmpty())
       throw new ListVazia("Lista Vaiza");
-    return i.GetNext().GetElement().Equals(o);
+    return i.GetNext()==o;
   }
-  public Boolean isLast(object o){
+  public Boolean isLast(Node o){
     if(isEmpty())
       throw new ListVazia("Lista Vaiza");
-    return f.GetPrev().GetElement().Equals(o);
+    return f.GetPrev()==o;
   }
-  public object First(){
+  public Node First(){
     if(isEmpty())
       throw new ListVazia("Lista Vaiza");
-    return i.GetNext().GetElement();
+    return i.GetNext();
   }
-  public object Last(){
+  public Node Last(){
     if(isEmpty())
       throw new ListVazia("Lista Vaiza");
-    return f.GetPrev().GetElement();
+    return f.GetPrev();
   }
-  public object Before(object o){
+  public Node Before(Node n){
     if(isEmpty())
       throw new ListVazia("Lista vazia");
-    int index_aux = size;
-    Node current = i.GetNext();
-    while(index_aux!=0){
-      if(current.GetElement().Equals(o))
-        break;
-      current = current.GetNext();
-      index_aux--;
-    }
-    if(index_aux==0)
-      throw new ElementoNaoExiste("Elemento não existe");
-    return current.GetPrev().GetElement();
+    return n.GetPrev();
   }
-  public object After(object o){
+  public Node After(Node n){
      if(isEmpty())
       throw new ListVazia("Lista vazia");
-    int index_aux = size;
-    Node current = f.GetPrev();
-    while(index_aux!=0){
-      if(current.GetElement().Equals(o))
-        break;
-      current = current.GetPrev();
-      index_aux--;
-    }
-    if(index_aux==0)
-     throw new ElementoNaoExiste("Elemento não existe");
-    return current.GetNext().GetElement();
+    return n.GetNext();
   }
-  public object replaceElement(object n, object o){
+  public object replaceElement(Node n, object o){
     if(isEmpty())
       throw new ListVazia("Lista vazia");
-    Node current = i.GetNext();
-    while(current!=null){
-      if(current.GetElement().Equals(n))
-        break;
-      current = current.GetNext();
-    }
-    if(current==null)
-      throw new ElementoNaoExiste(n+" Não existe na lista");
-    object temp = current.GetElement();
-    current.SetElement(o);
+    object temp = n.GetElement(); 
+    n.SetElement(o);
     return temp;
   }
-  public void swapElements(object n, object o){
+  public void swapElements(Node n, Node q){
     if(isEmpty())
       throw new ListVazia("Lista vazia");
-    Node a = i.GetNext();
-    while(a!=null){
-      if(a.GetElement().Equals(n))
-        break;
-      a = a.GetNext();
-    }
-    if(a==null)
-      throw new ElementoNaoExiste(n+" não existe na lista");
-    Node b = i.GetNext();
-    while(b!=null){
-      if(b.GetElement().Equals(o))
-        break;
-      b = b.GetNext();
-    }
-    if(b==null)
-      throw new ElementoNaoExiste(o+" não existe na lista");
-    object c = b.GetElement();
-    b.SetElement(a.GetElement());
-    a.SetElement(c);
+    object a = n.GetElement();
+    n.SetElement(q.GetElement());
+    q.SetElement(a);
   }
-  public void insertBefore(object n, object o){
+  public Node insertBefore(Node n, object o){
     if(isEmpty())
       throw new ListVazia("Lista vazia");
-    Node current = i.GetNext();
-    while(current!=null){
-      if(current.GetElement().Equals(n))
-        break;
-      current = current.GetNext();
-    }
-    if(current==null)
-      throw new ElementoNaoExiste(n+" não existe na lista");
     Node new_ = new Node(o);
-    Node current_prev = current.GetPrev();
-    new_.SetNext(current);
-    new_.SetPrev(current_prev);
-    current.SetPrev(new_);
-    current_prev.SetNext(new_);
+    Node n_before = n.GetPrev();
+    new_.SetPrev(n_before);
+    new_.SetNext(n);
+    n.SetPrev(new_);
+    n_before.SetNext(new_);
     size++;
+    return new_;
   }
-  public void insertAfter(object n, object o){
+  public Node insertAfter(Node n, object o){
     if(isEmpty())
       throw new ListVazia("Lista vazia");
-    Node current = i.GetNext();
-    while(current!=null){
-      if(current.GetElement().Equals(n))
-        break;
-      current = current.GetNext();
-    }
-    if(current==null)
-      throw new ElementoNaoExiste(n+" não existe na lista");
     Node new_ = new Node(o);
-    Node current_next = current.GetNext();
-    new_.SetPrev(current);
-    new_.SetNext(current_next);
-    current.SetNext(new_);
-    current_next.SetPrev(new_);
+    Node n_next = n.GetNext();
+    new_.SetNext(n_next);
+    new_.SetPrev(n);
+    n_next.SetPrev(new_);
+    n.SetNext(new_);
     size++;
+    return new_;
   }
-  public void insertFirst(object o){
+  public Node insertFirst(object o){
     Node new_ = new Node(o);
-    if(isEmpty()){
-      new_.SetPrev(i);
-      new_.SetNext(f);
-      i.SetNext(new_);
-      f.SetPrev(new_);
-    }
-    else{
-      Node i_next = i.GetNext();
-      i.SetNext(new_);
-      i_next.SetPrev(new_);
-      new_.SetNext(i_next);
-      new_.SetPrev(i);
-    }
+    Node i_next = i.GetNext();
+    i.SetNext(new_);
+    i_next.SetPrev(new_);
+    new_.SetNext(i_next);
+    new_.SetPrev(i);
     size++;
+    return new_;
   }
-  public void insertLast(object o){
+  public Node insertLast(object o){
     Node new_ = new Node(o);
-    if(isEmpty()){
-      new_.SetPrev(i);
-      new_.SetNext(f);
-      i.SetNext(new_);
-      f.SetPrev(new_);
-    }
-    else{
-      Node f_prev = f.GetPrev();
-      new_.SetPrev(f_prev);
-      new_.SetNext(f);
-      f.SetPrev(new_);
-      f_prev.SetNext(new_);
-    }
+    Node f_prev = f.GetPrev();
+    new_.SetPrev(f_prev);
+    new_.SetNext(f);
+    f.SetPrev(new_);
+    f_prev.SetNext(new_);
     size++;
+    return new_;
   }
 
-  public object Remove(object o){
+  public object Remove(Node n){
     if(isEmpty())
       throw new ListVazia("Lista vazia");
-    Node current = i.GetNext();
-    while(current!=null){
-      if(current.GetElement().Equals(o))
-        break;
-      current = current.GetNext();
-    }
-    if(current==null)
-      throw new ElementoNaoExiste("Elemento não existe na lista");
-    Node current_next = current.GetNext();
-    Node current_prev = current.GetPrev();
-    current_prev.SetNext(current_next);
-    current_next.SetPrev(current_prev);
+    Node n_next = n.GetNext();
+    Node n_prev = n.GetPrev();
+    n_next.SetPrev(n_prev);
+    n_prev.SetNext(n_next);
+    object temp = n.GetElement();
+    n.SetNext(null);
+    n.SetPrev(null);
+    n = null;
     size--;
-    return current.GetElement();
+    return temp;
   }
   public Boolean isEmpty(){
     return size==0;
@@ -254,7 +180,6 @@ class List{
       current = current.GetNext();
     }
   }
-  
   public void Ver_Lista_f(){
    Node current = f;
    while(current!=null){
@@ -267,10 +192,6 @@ class List{
 /*---------- CLASSES DAS EXCEÇÕES ---------*/
 public class ListVazia : Exception { 
   public ListVazia(String err){ }
-}
-  
-public class ElementoNaoExiste : Exception { 
-  public ElementoNaoExiste(String err){ }
 }
 
 /*----------CLASSE NÓ-------------*/

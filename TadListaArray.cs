@@ -227,17 +227,17 @@ interface IList{
   //Retorna o antes do object *
   object After(object p);
   //Substitui o object n pelo object o *
-  void replaceElement(object n, object o);
+  object replaceElement(object n, object o);
   //Troca o object n com object o *
   void swapElements(object n, object o);
   //Insere o depois do n 
-  void insertBefore(object n, object o);
+  object insertBefore(object n, object o);
   //Insere o antes do n
-  void insertAfter(object n, object o);
+  object insertAfter(object n, object o);
   //Insere no inicio *
-  void insertFirst(object o);
+  object insertFirst(object o);
   //Insere no fim *
-  void insertLast(object o);
+  object insertLast(object o);
   //Remove n 
   object Remove(object n);
   //retorna o tamanho
