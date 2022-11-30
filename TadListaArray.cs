@@ -63,9 +63,7 @@ class List: IList{
         index = i;
         break;
       }
-    if(index==-1 || index==size-1)
-      throw new ElementoNaoExiste("Elemente não existe");
-    return list[index+1];
+    return list[index-1];
   }
   public object After(object p){
     if(isEmpty())
@@ -76,9 +74,7 @@ class List: IList{
         index = i;
         break;
       }
-    if(index==-1 || index==0)
-      throw new ElementoNaoExiste("Elemente não existe");
-    return list[index-1];
+    return list[index+1];
   }
   public void insertFirst(object o){
     if(capacity==size)
@@ -96,7 +92,7 @@ class List: IList{
       Capacity_Up();
     list[size++] = o;
   }
-  public void replaceElement(object n, object o){
+  public object replaceElement(object n, object o){
     if(isEmpty())
       throw new ListVazia("Lista Vazia");
     int index = -1;
@@ -105,9 +101,9 @@ class List: IList{
         index = i;
         break;
       }
-    if(index==-1)
-      throw new ElementoNaoExiste("Elemente não existe");
+    object temp = list[index];
     list[index] = o;
+    return temp;
   }
   public void swapElements(object n, object o){
     if(isEmpty())
@@ -123,8 +119,6 @@ class List: IList{
         index2 = i;
         break;
       }
-    if(index1==-1 || index2==-1)
-      throw new ElementoNaoExiste("Elemente não existe");
     object aux = list[index1];
     list[index1] = list[index2];
     list[index2] = aux;
@@ -138,8 +132,6 @@ class List: IList{
         index = i;
         break;
       }
-    if(index==-1)
-      throw new ElementoNaoExiste("Elemente não existe");
     for(int i=size; i>index; i--){
       list[i] = list[i-1];
     }
@@ -155,8 +147,6 @@ class List: IList{
         index = i;
         break;
       }
-    if(index==-1)
-      throw new ElementoNaoExiste("Elemente não existe");
     for(int i=size; i>index; i--){
       list[i] = list[i-1];
     }
@@ -172,8 +162,6 @@ class List: IList{
         index = i;
         break;
       }
-    if(index==-1)
-      throw new ElementoNaoExiste("Elemento não existe");
     object temp = list[index];
     for(int i=index; i<size; i++)
       list[i] = list[i+1];
