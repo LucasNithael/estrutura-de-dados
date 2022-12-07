@@ -12,7 +12,7 @@ class Program{
       //l.swapElements(3, 5);
       //l.insertAfter(5, 8);
       //l.insertBefore(5, 10);
-      //l.Remove(5);
+      l.Remove(3);
       //Console.WriteLine("\nSize:"+l.size);
       l.ver_list();
     }
@@ -164,10 +164,6 @@ class List: IList{
         break;
       }
     object temp = list[index];
-    if(index==size-1){
-      size--;
-      return temp;
-    }
     for(int i=index; i<size; i++)
       list[i] = list[i+1];
     size--;

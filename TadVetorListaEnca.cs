@@ -18,7 +18,7 @@ class MainClass{
 }
 
 
-/************ Classe Do Vetor **************/
+/**************** Classe Do Vetor **************/
 class Vector{
   private Node i,f;
   private int size;
