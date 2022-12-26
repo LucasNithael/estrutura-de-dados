@@ -11,7 +11,7 @@ class MainClass{
     v.removeAtRank(1);
     Console.WriteLine("ElementAtRank:"+v.elementAtRank(3));
     v.Ver_Lista_i();
-    
+    Console.WriteLine();jjjklnj02020
     v.Ver_Lista_f();
     
   }
@@ -62,40 +62,15 @@ class Vector{
     if(r>size)
       throw new IndiceForadeFaixa("Índice fora de faixa");
     Node new_ = new Node(o);
-    if(r==0 && isEmpty()){
-      new_.GetPrev(i);
-      new_.GetNext(f);
-      i.SetNext(new_);
-      f.SetPrev(new_);
+    Node current = i;
+    while(r!=0){
+      current = current.GetNext();
+      r--;
     }
-    else if(r==size){
-      Node previus_f = f.GetPrev();
-      new_.SetNext(f);
-      new_.SetPrev(f.GetPrev());
-      previus_f.SetNext(new_);
-      f.SetPrev(new_);
-    }
-    else{
-      Node current = i;
-      while(r!=0){
-        current = current.GetNext();
-        r--;
-      }
-      if(current==i){
-        Node previus_next_i = i.GetNext();
-        new_.SetNext(i.GetNext());
-        new_.SetPrev(i);
-        previus_next_i.SetPrev(new_);
-        i.SetNext(new_);
-      }
-      else{
-        new_.SetPrev(current);
-        new_.SetNext(current.GetNext());
-        Node current_next = current.GetNext();
-        current_next.SetPrev(new_);
-        current.SetNext(new_);
-      }
-    }
+    new_.SetPrev(current);
+    new_.SetNext(current.GetNext());
+    current.GetNext().SetPrev(new_);
+    current.SetNext(new_);
     size++;
   }
 
