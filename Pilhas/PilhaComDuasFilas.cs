@@ -1,18 +1,6 @@
 using System;
 using System.Collections;
-
-class MainClass{
-  public static void Main(){
-    Pilha p = new Pilha();
-    p.Push(3);
-    p.Push(4);
-    p.Push(5);
-    Console.WriteLine("Size: "+p.Size());
-    Console.WriteLine("Pop: "+p.Pop());
-    Console.WriteLine("Pop: "+p.Pop());
-    Console.WriteLine("Top: "+p.Top());
-  }
-}
+using Exception;
 
 class Pilha{
   Queue f1 = new Queue();
@@ -63,9 +51,4 @@ class Pilha{
         f1.Enqueue(f2.Dequeue());
     }
   }
-}
-
-
-public class PilhaVazia : Exception { 
-  public PilhaVazia(String err){ }
 }

@@ -18,44 +18,8 @@
 
 using System;
 
-class Program{
-  public static void Main(){
-    try{
-      Node a, b, c, d, e;
-      List l = new List();
-      a = l.insertFirst(1);
-      b = l.insertFirst(2);
-      c = l.insertFirst(3);
-      //d = l.insertLast(4);
-      //e = l.insertLast(5);
 
-      Console.WriteLine("------------------------------");
-      //Console.WriteLine("isFirst: "+l.isFirst(a));
-      //Console.WriteLine("isLast: "+l.isLast(a));
-      //Console.WriteLine("First: "+l.First().GetElement());
-      //Console.WriteLine("Last: "+l.Last().GetElement());
-      //Console.WriteLine("Before: "+l.Before(a).GetElement());
-      //Console.WriteLine("After: "+l.After(c).GetElement());
-      //Console.WriteLine("replaceElement: "+l.replaceElement(a, 4));
-      //l.swapElements(a, c);
-      //l.insertBefore(c, 5);
-      //l.insertAfter(a, 100);
-      //Console.WriteLine("Remove: "+l.Remove(a));
-      Console.WriteLine("Size:"+l.Size());
-      Console.WriteLine("------------------------------");
-      
-      Console.WriteLine("\nInício para o Fim:");
-      l.Ver_Lista_i();
-      Console.WriteLine("\nFim para o Início:");
-      l.Ver_Lista_f();
-    }
-    catch(ListVazia){
-      Console.WriteLine("Lista Vazia");
-    }
-  }
-}
 
-/*---------CLASSE DA LISTA----------*/
 class List{
   private Node i = new Node(null); 
   private Node f = new Node(null);
@@ -186,37 +150,5 @@ class List{
      Console.Write(current.GetElement()+"<->");
      current = current.GetPrev();
    }
-  }
-}
-
-/*---------- CLASSES DAS EXCEÇÕES ---------*/
-public class ListVazia : Exception { 
-  public ListVazia(String err){ }
-}
-
-/*----------CLASSE NÓ-------------*/
-class Node{
-  private object element;
-  private Node next, prev;
-  public Node(object e){
-    SetElement(e);
-  }
-  public void SetElement(object e){
-    this.element = e;
-  }
-  public void SetNext(Node n){
-    this.next = n;
-  }
-  public void SetPrev(Node n){
-    this.prev = n;
-  }
-  public object GetElement(){
-    return element;
-  }
-  public Node GetNext(){
-    return next;
-  }
-  public Node GetPrev(){
-    return prev;
   }
 }

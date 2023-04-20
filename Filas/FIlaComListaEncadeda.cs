@@ -1,43 +1,7 @@
 using System;
 
-class Program{
-  public static void Main(){
-    Fila f = new Fila();
-    for(int i=1; i<=4; i++) 
-      f.Enqueue(i);
-    //Console.WriteLine("Dequeue: " + f.Dequeue());
-    //Console.WriteLine("Dequeue: " + f.Dequeue());
-    //Console.WriteLine("Size: " + f.Size());
-    Console.WriteLine("isEmpty: " + f.IsEmpty());
-    f.print();
-  }
-}
-
-
-//Classe do No
-class No{
-  private object element;
-  private No next;
-  public No(object e){
-    SetElement(e);
-  }
-  public void SetElement(object e){
-    this.element = e;
-  }
-  public void SetNext(No n){
-    this.next = n;
-  }
-  public object GetElement(){
-    return element;
-  }
-  public No GetNext(){
-    return next;
-  }
-}
-
-
 //Class da Fila
-class Fila{
+class FilaComListaEncadeada{
   private No first;
   private No last;
   private int size;
@@ -87,10 +51,4 @@ class Fila{
       current = current.GetNext();
     }
   }
-}
-
-
-//Classe da Exceção
-public class FilaVazia : Exception { 
-  public FilaVazia(String err){ }
 }

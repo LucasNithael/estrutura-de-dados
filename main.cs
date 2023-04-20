@@ -1,8 +1,11 @@
 using System;
+using MinhaPilha;
 
 class Program{
   public static void Main(){
-    object x = Console.ReadLine();
-    Console.WriteLine(x);
+    Pilha p = new Pilha();
+
+    p.Push(1);
+    Console.Write(p.Top());
   }
 }

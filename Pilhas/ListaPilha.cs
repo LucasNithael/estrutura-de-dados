@@ -1,4 +1,5 @@
 using System;
+using Exception;
 
 class Program{
   public static void Main(){

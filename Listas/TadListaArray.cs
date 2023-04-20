@@ -1,29 +1,6 @@
 using System;
 
-class Program{
-  public static void Main(){
-    try{
-      List l = new List();
-      l.insertFirst(3);
-      l.insertLast(4);
-      l.insertLast(5);
-      //Console.WriteLine("After: "+l.After(4));
-      //l.replaceElement(5, 100);
-      //l.swapElements(3, 5);
-      //l.insertAfter(5, 8);
-      //l.insertBefore(5, 10);
-      l.Remove(3);
-      //Console.WriteLine("\nSize:"+l.size);
-      l.ver_list();
-    }
-    catch(ListVazia){
-      Console.WriteLine("Lista vazia");
-    }
-  }
-}
 
-
-/*--------- CLASSE DO TAD LIST ----------*/
 class List: IList{
   public object[] list;
   public int size, capacity;
@@ -188,49 +165,4 @@ class List: IList{
       Console.Write(list[i]+" ");
     Console.Write("]");
   }
-}
-
-
-/*---------- CLASSES DAS EXCEÇÕES ---------*/
-public class ListVazia : Exception { 
-  public ListVazia(String err){ }
-}
-  
-public class ElementoNaoExiste : Exception { 
-  public ElementoNaoExiste(String err){ }
-}
-
-
-/* ------INTERFACE DOS MÉTODOS--------*/ 
-interface IList{
-  //Verifica se o object é primeiro  *
-  Boolean isFirst(object n);
-  //Verifica se o object é último *
-  Boolean isLast(object n);
-  //Retorna o primeiro *
-  object First();
-  //Retorna o último *
-  object Last();
-  //Retorna o depois do obejct *
-  object Before(object p);
-  //Retorna o antes do object *
-  object After(object p);
-  //Substitui o object n pelo object o *
-  object replaceElement(object n, object o);
-  //Troca o object n com object o *
-  void swapElements(object n, object o);
-  //Insere o depois do n 
-  void insertBefore(object n, object o);
-  //Insere o antes do n
-  void insertAfter(object n, object o);
-  //Insere no inicio *
-  void insertFirst(object o);
-  //Insere no fim *
-  void insertLast(object o);
-  //Remove n 
-  object Remove(object n);
-  //retorna o tamanho
-  int Size();
-  //Retorna se há elementos ou nãobject
-  Boolean isEmpty();
 }

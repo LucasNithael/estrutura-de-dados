@@ -1,21 +1,5 @@
 using System;
 
-class Program{
-  public static void Main(){
-    Fila f = new Fila(5);
-    f.Enqueue(1);
-    f.Enqueue(2);
-    f.Enqueue(3);
-    f.Enqueue(4);
-    f.Enqueue(5);
-    f.Enqueue(6);
-    f.Dequeue();
-    Console.WriteLine(f.IsEmpty());
-    Console.WriteLine(f.Size());
-    Console.WriteLine(f.First());
-    
-  }
-}
 
 //Classe da Fila 
 class Fila{
@@ -73,7 +57,3 @@ class Fila{
   
 }
 
-//Classe de Exceção de Fila Vazia
-public class FilaVazia : Exception { 
-  public FilaVazia(String err){ }
-}
